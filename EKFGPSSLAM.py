@@ -16,7 +16,7 @@ import traceback
 from typing import Dict, Tuple, Optional, List, Any
 
 # ----------------------------
-# 配置参数 (增加 Sim3 初始段最大时长)
+# 配置参数 
 # ----------------------------
 CONFIG = {
     # EKF 参数
@@ -53,7 +53,7 @@ CONFIG = {
 }
 
 # ----------------------------
-# 辅助函数 (此处无需修改)
+# 辅助函数
 # ----------------------------
 
 def calculate_relative_pose(pose1_pos: np.ndarray, pose1_quat: np.ndarray,
@@ -107,7 +107,7 @@ def quaternion_nlerp(q1: np.ndarray, q2: np.ndarray, weight_q2: float) -> np.nda
     return q_interp / norm
 
 # ----------------------------
-# 数据加载与预处理 (此处无需修改)
+# 数据加载与预处理
 # ----------------------------
 
 def load_slam_trajectory(txt_path: str) -> Dict[str, np.ndarray]:
@@ -138,7 +138,7 @@ def auto_utm_projection(lons: np.ndarray, lats: np.ndarray) -> Tuple[int, str]:
     return zone, hemisphere
 
 # -------------------------------------------
-# GPS 离群点过滤模块 (此处无需修改)
+# GPS 离群点过滤模块
 # -------------------------------------------
 def filter_gps_outliers_ransac(times: np.ndarray, positions: np.ndarray,
                                config: Dict[str, Any]) -> Tuple[np.ndarray, np.ndarray]:
@@ -383,7 +383,7 @@ def utm_to_wgs84(utm_points: np.ndarray, projector: Proj) -> np.ndarray:
 
 
 # ----------------------------
-# 时间对齐与变换计算 (此处无需修改)
+# 时间对齐与变换计算
 # ----------------------------
 def estimate_time_offset(slam_times: np.ndarray, gps_times: np.ndarray, max_samples: int) -> float:
     """通过互相关估计时钟偏移"""
@@ -744,7 +744,7 @@ def transform_trajectory(positions: np.ndarray, quaternions: np.ndarray,
 
     return trans_pos, np.array(trans_quat_list)
 
-# --- 可视化与评估系统 (此处无需修改) ---
+# --- 可视化与评估系统  ---
 def plot_results(original_pos: np.ndarray,
                  sim3_pos_ekf_input: np.ndarray,
                  corrected_pos: np.ndarray,
@@ -995,7 +995,7 @@ def plot_results(original_pos: np.ndarray,
     plt.show()
 
 
-# --- GUI文件选择功能 (此处无需修改) ---
+# --- GUI文件选择功能 ---
 def select_file_dialog(title: str, filetypes: List[Tuple[str, str]]) -> str:
     """通用文件选择对话框"""
     root = tk.Tk()
@@ -1017,7 +1017,7 @@ def select_gps_file() -> str:
     )
 
 # ----------------------------
-# EKF 实现 (此处无需修改)
+# EKF 实现 
 # ----------------------------
 
 class ExtendedKalmanFilter:
@@ -1267,7 +1267,7 @@ class ExtendedKalmanFilter:
         return self.state[:3].copy(), self.state[3:].copy() # 返回位置和四元数
 
 # ----------------------------
-# EKF 轨迹修正应用函数 (此处无需修改)
+# EKF 轨迹修正应用函数
 # ----------------------------
 
 def apply_ekf_correction(slam_data: Dict[str, np.ndarray], gps_data: Dict[str, np.ndarray],
@@ -1382,7 +1382,7 @@ def apply_ekf_correction(slam_data: Dict[str, np.ndarray], gps_data: Dict[str, n
     return corrected_pos_list, corrected_quat_list
 
 # ----------------------------
-# 主流程控制 (修改 Sim3 部分)
+# 主流程控制
 # ----------------------------
 def main_process_gui():
     """主处理流程，包含GUI文件选择、处理、评估和可视化"""
